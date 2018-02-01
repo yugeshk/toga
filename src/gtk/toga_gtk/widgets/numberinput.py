@@ -17,25 +17,39 @@ class NumberInput(Widget):
         self.rehint()
 
     def set_readonly(self, value):
-        self.native.editable = not value
+        self.native.set_property('editable', not value)
 
     def set_step(self, step):
-        raise NotImplementedError()
+        if step:
+            self.native.set_increments(step,step)
+
+    # def set_range(self, max-val, min_val):
+
 
     def set_min_value(self, value):
-        raise NotImplementedError()
+        self.native.set_range(min=value)
 
     def set_max_value(self, value):
-        raise NotImplementedError()
+        self.native.set_range(max=value)
 
     def set_value(self, value):
         self.native.set_value(value)
 
     def set_alignment(self, value):
-        raise NotImplementedError()
+        if value == 'left':
+            self.native.set_alignment(0)
+        elif value == 'right':
+            self.native.set_alignment(1)
+        else:
+            try:
+                float(value) >=0.0 and float(value) <=1.0
+                self.native.set_alignment(float(value))
+            except (RuntimeError, TypeError, NameError):
+                pass
 
     def set_font(self, value):
-        raise NotImplementedError()
+        if value:
+            self.native.modify_font(value._impl.native)
 
     def rehint(self):
         self.interface.style.min_width = self.interface.MIN_WIDTH

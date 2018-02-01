@@ -24,12 +24,12 @@ class NumberInput(Widget):
         super().__init__(id=id, style=style, factory=factory)
         self._value = None
         self._impl = self.factory.NumberInput(interface=self)
-
-        self.readonly = readonly
-        self.step = step
+        
         self.min_value = min_value
         self.max_value = max_value
         self.on_change = on_change
+        self.readonly = readonly
+        self.step = step
 
     @property
     def readonly(self):
@@ -102,6 +102,34 @@ class NumberInput(Widget):
         except TypeError:
             self._max_value = None
         self._impl.set_max_value(value)
+
+    # @property
+    # def range(self):
+    #     """The range for the widget's value.
+
+    #     Returns:
+    #         The maximum and minimum bounds for the widget's value. If either
+    #         bound is None, there is no value for that bound.
+    #     """
+    #     return self._min_value, self._max_value
+
+    # @range.setter
+    # def range(self, min_val, max_val):
+    #     try:
+    #         self._max_value = int(max_val)
+    #     except ValueError:
+    #         raise ValueError("max_value must be an integer")
+    #     except TypeError:
+    #         self._max_value = None
+    #     self._impl.set_max_value(value)
+    #     try:
+    #         self._min_value = int(min_val)
+    #     except ValueError:
+    #         raise ValueError("min_value must be an integer")
+    #     except TypeError:
+    #         self._min_value = None
+    #     self._impl.set_min_value(value)
+
 
     @property
     def value(self):

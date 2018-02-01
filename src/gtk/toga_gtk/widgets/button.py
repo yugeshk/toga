@@ -17,14 +17,14 @@ class Button(Widget):
         self.rehint()
 
     def set_enabled(self, value):
-        # self._impl.set_sensitive(value)
-        raise NotImplementedError()
+        self.native.set_sensitive(value)
 
     def set_background_color(self, value):
-        raise NotImplementedError()
+        if value:
+            self.native.override_background_color(value)
 
     def set_on_press(self, handler):
-        raise NotImplementedError()
+        pass
 
     def rehint(self):
         # print("REHINT", self, self.native.get_preferred_width(), self.native.get_preferred_height())

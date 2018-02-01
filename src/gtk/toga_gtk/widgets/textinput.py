@@ -12,16 +12,26 @@ class TextInput(Widget):
         self.native.connect('show', lambda event: self.rehint())
 
     def set_readonly(self, value):
-        self.native.editable = not value
+        self.native.set_property('editable', not value)
 
     def set_placeholder(self, value):
         self.native.set_placeholder_text(value)
 
     def set_alignment(self, value):
-        raise NotImplementedError()
+        if value == 'left':
+            self.native.set_alignment(0)
+        elif value == 'right':
+            self.native.set_alignment(1)
+        else:
+            try:
+                float(value) >=0.0 and float(value) <=1.0
+                self.native.set_alignment(float(value))
+            except (RuntimeError, TypeError, NameError):
+                pass
 
     def set_font(self, value):
-        raise NotImplementedError()
+        if value:
+            self.native.modify_font(value._impl.native)
 
     def get_value(self):
         return self.native.get_text()
