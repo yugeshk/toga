@@ -59,7 +59,8 @@ class Widget:
         pass
 
     def set_background_color(self, color):
-        # By default, background color can't be changed
+        if color:
+            self.native.set_background_color(self, color)
         pass
 
     ### INTERFACE

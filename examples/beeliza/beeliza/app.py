@@ -5,7 +5,7 @@ import toga
 from toga.constants import ROW, COLUMN
 from toga.style import Pack
 
-from .bot import Eliza
+from beeliza.bot import Eliza
 
 
 class BeelizaApp(toga.App):

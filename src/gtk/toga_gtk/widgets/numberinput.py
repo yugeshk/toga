@@ -5,16 +5,18 @@ from .base import Widget
 
 class NumberInput(Widget):
     def create(self):
-        adjustment = Gtk.Adjustment(0, self.interface.min_value,
-                                    self.interface.max_value,
-                                    self.interface.step, 10, 0)
-
         self.native = Gtk.SpinButton()
-        self.native.set_adjustment(adjustment)
         self.native.set_numeric(True)
         self.native.interface = self.interface
 
         self.rehint()
+
+    def set_adjustment_value(self):
+        adjustment = Gtk.Adjustment(0, self.interface.min_value,
+                                        self.interface.max_value,
+                                        self.interface.step, 10, 0)
+        self.native.set_adjustment(adjustment)
+
 
     def set_readonly(self, value):
         self.native.set_property('editable', not value)
@@ -23,14 +25,17 @@ class NumberInput(Widget):
         if step:
             self.native.set_increments(step,step)
 
-    # def set_range(self, max-val, min_val):
-
+    def set_range(self, max_val, min_val):
+        if max_value and min_value:
+            self.native.set_range(min_value,max_value)
 
     def set_min_value(self, value):
-        self.native.set_range(min=value)
+        # self.native.set_range(min=value)
+        pass
 
     def set_max_value(self, value):
-        self.native.set_range(max=value)
+        # self.native.set_range(max=value)
+        pass
 
     def set_value(self, value):
         self.native.set_value(value)

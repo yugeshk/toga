@@ -11,7 +11,7 @@ class ProgressBar(Widget):
     def set_value(self, value):
         if value is not None:
             self.interface._running = self.interface.value is not None
-            self.native.set_fraction(float(self.interface.value) / float(self.interface.max))
+            self.native.set_fraction(float(value) / float(100))
 
     def start(self):
         if not self.interface._running:
@@ -23,4 +23,6 @@ class ProgressBar(Widget):
 
     def set_max(self, value):
         # No special handling required
+        print("I need it")
+        self.interface.max=value
         pass

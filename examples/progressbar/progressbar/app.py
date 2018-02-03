@@ -46,7 +46,7 @@ class ProgressBarApp(toga.App):
                 ]),
 
                 toga.Box(style=box_style, children=[
-                    toga.Switch("Toggle running mode")
+                    toga.Switch("Toggle running mode"),
                     self.progress3
                 ])
             ],
@@ -65,3 +65,6 @@ class ProgressBarApp(toga.App):
 def main():
     # App name and namespace
     return ProgressBarApp('ProgressBar', 'org.pybee.examples.progressbar')
+
+if __name__ == '__main__':
+    main().main_loop()

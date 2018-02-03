@@ -83,6 +83,7 @@ class Pack(BaseStyle):
             elif prop == 'color':
                 self._applicator.set_color(value)
             elif prop == 'background_color':
+                print(value)
                 self._applicator.set_background_color(value)
             elif prop == 'hidden':
                 self._applicator.set_hidden(value)

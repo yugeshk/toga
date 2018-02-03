@@ -20,7 +20,7 @@ class NumberInput(Widget):
     MIN_WIDTH = 100
 
     def __init__(self, id=None, style=None, factory=None, step=1,
-                 min_value=None, max_value=None, readonly=False, on_change=None):
+                 min_value=None, max_value=None, readonly=False, on_change=None, adjustment=None):
         super().__init__(id=id, style=style, factory=factory)
         self._value = None
         self._impl = self.factory.NumberInput(interface=self)
@@ -30,6 +30,18 @@ class NumberInput(Widget):
         self.on_change = on_change
         self.readonly = readonly
         self.step = step
+        self.adjustment = adjustment
+
+    @property
+    def adjustment(self):
+        return self._adjustment
+
+    @adjustment.setter
+    def adjustment(self, value):
+        try:
+            self._impl.set_adjustment_value()
+        except (ValueError, TypeError):
+            raise ValueError("Adjustment Could Not be set")
 
     @property
     def readonly(self):

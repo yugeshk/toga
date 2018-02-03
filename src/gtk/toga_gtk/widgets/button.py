@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 from travertino.size import at_least
 
 from .base import Widget
@@ -21,7 +21,13 @@ class Button(Widget):
 
     def set_background_color(self, value):
         if value:
-            self.native.override_background_color(value)
+            color = Gdk.RGBA()
+            color.red = value.rgba.r/255
+            color.green = value.rgba.g/255
+            color.blue = value.rgba.b/255
+            color.alpha = value.rgba.a
+            flags = self.native.get_state_flags()
+            self.native.override_background_color(flags,color)
 
     def set_on_press(self, handler):
         pass
