@@ -30,6 +30,7 @@ class Button(Widget):
             self.native.override_background_color(flags,color)
 
     def set_on_press(self, handler):
+        #No special handling required
         pass
 
     def rehint(self):
